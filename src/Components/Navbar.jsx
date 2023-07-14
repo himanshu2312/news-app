@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 export default class Navbar extends Component {
   render() {
+    let { NavbarTitle } = this.props;
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
-              Navbar
+              <b>{NavbarTitle}</b>
             </a>
             <button
               className="navbar-toggler"
               type="button"
-
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
@@ -38,6 +38,20 @@ export default class Navbar extends Component {
                 </li>
               </ul>
             </div>
+            {/* <div class="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+              />
+              <label
+                className="form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Dark Mode
+              </label>
+            </div> */}
           </div>
         </nav>
       </div>
