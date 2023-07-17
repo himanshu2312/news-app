@@ -12,19 +12,24 @@ export default class News extends Component {
     };
     console.log(this.state.page);
   }
-
+  
   componentDidMount() {
     this.loadPage(0);
   }
 
   loadPage = async (n) => {
+    let {pages}=this.props
     let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
       this.state.page + n
-    }`;
+    }&PageSize=${pages}`;
     let data = await fetch(url);
     let parseData = await data.json();
     // console.log(parseData);
-    this.setState({ articles: parseData.articles, page: this.state.page + n , totalResults: parseData.totalResults });
+    this.setState({
+      articles: parseData.articles,
+      page: this.state.page + n,
+      totalResults: parseData.totalResults,
+    });
   };
 
   handleNext = () => {
@@ -36,6 +41,7 @@ export default class News extends Component {
   };
 
   render() {
+
     return (
       <div className="container">
         <h1>
@@ -72,7 +78,9 @@ export default class News extends Component {
             id="btnNext"
             className="btn btn-primary "
             onClick={this.handleNext}
-            disabled={Math.ceil(this.state.totalResults/20)===this.state.page}
+            disabled={
+              Math.ceil(this.state.totalResults / this.props.pages) === this.state.page
+            }
           >
             Next &rarr;
           </button>
