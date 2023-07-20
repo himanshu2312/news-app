@@ -4,7 +4,6 @@ import NewsItem from "./NewsItem";
 export default class News extends Component {
   constructor() {
     super();
-    // console.log("I am a constructor of news component")
     this.state = {
       articles: [],
       loading: false,
@@ -18,13 +17,14 @@ export default class News extends Component {
   }
 
   loadPage = async (n) => {
-    let {pages}=this.props
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
+    let {pageSize,category, country}=this.props
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
       this.state.page + n
-    }&PageSize=${pages}`;
+    }&PageSize=${pageSize}`;
+    console.log(url)
     let data = await fetch(url);
     let parseData = await data.json();
-    // console.log(parseData);
+    console.log(parseData);
     this.setState({
       articles: parseData.articles,
       page: this.state.page + n,
@@ -65,7 +65,7 @@ export default class News extends Component {
             );
           })}
         </div>
-        <div className="container d-flex justify-content-between">
+        <div className="container d-flex justify-content-between my-3">
           <button
             id="btnPre"
             className="btn btn-secondary "
@@ -79,7 +79,7 @@ export default class News extends Component {
             className="btn btn-primary "
             onClick={this.handleNext}
             disabled={
-              Math.ceil(this.state.totalResults / this.props.pages) === this.state.page
+              Math.ceil(this.state.totalResults / this.props.pageSize) === this.state.page
             }
           >
             Next &rarr;
