@@ -44,7 +44,7 @@ export default class News extends Component {
 
     return (
       <div className="container">
-        <h1>
+        <h1 style={{margin: '20px'}}>
           <center>NewsTechs - Top headlines</center>
         </h1>
         <div className="row">
@@ -68,7 +68,7 @@ export default class News extends Component {
         <div className="container d-flex justify-content-between my-3">
           <button
             id="btnPre"
-            className="btn btn-secondary "
+            className="btn btn-dark "
             disabled={this.state.page <= 1}
             onClick={this.handlePre}
           >
@@ -76,7 +76,7 @@ export default class News extends Component {
           </button>
           <button
             id="btnNext"
-            className="btn btn-primary "
+            className="btn btn-dark "
             onClick={this.handleNext}
             disabled={
               Math.ceil(this.state.totalResults / this.props.pageSize) === this.state.page
