@@ -9,7 +9,6 @@ export default class News extends Component {
       loading: false,
       page: 1,
     };
-    console.log(this.state.page);
   }
   
   componentDidMount() {
@@ -18,19 +17,26 @@ export default class News extends Component {
 
   loadPage = async (n) => {
     let {pageSize,category, country}=this.props
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category==='home'?'general':category}&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
       this.state.page + n
     }&PageSize=${pageSize}`;
-    console.log(url)
+    this.setState({
+      loading:true
+    })
+    document.title=`${this.capitalize(category)} - NewsTechs`
     let data = await fetch(url);
     let parseData = await data.json();
-    console.log(parseData);
     this.setState({
       articles: parseData.articles,
       page: this.state.page + n,
       totalResults: parseData.totalResults,
+      loading: false
     });
   };
+
+  capitalize=(str)=>{
+     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   handleNext = () => {
     this.loadPage(1);
@@ -45,7 +51,7 @@ export default class News extends Component {
     return (
       <div className="container">
         <h1 style={{margin: '20px'}}>
-          <center>NewsTechs - Top headlines</center>
+          <center>{`NewsTechs - Top headlines ${this.props.category==='home'?"":`on ${this.capitalize(this.props.category)}`}`}</center>
         </h1>
         <div className="row">
           {this.state.articles.map((ele) => {
@@ -60,6 +66,9 @@ export default class News extends Component {
                       : "https://cdn0.iconfinder.com/data/icons/ui-3-1/512/news-128.png"
                   }
                   newsurl={ele.url}
+                  author={ele.author}
+                  date={(new Date(ele.publishedAt)).toGMTString()}
+                  source={ele.source.name}
                 />
               </div>
             );
