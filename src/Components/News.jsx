@@ -69,8 +69,6 @@ export default class News extends Component {
                       description={ele.description ? ele.description : ""}
                       img={
                         ele.urlToImage
-                        ? ele.urlToImage
-                          : "https://cdn0.iconfinder.com/data/icons/ui-3-1/512/news-128.png"
                       }
                       newsurl={ele.url}
                       author={ele.author}
