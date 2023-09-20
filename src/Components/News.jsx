@@ -14,14 +14,14 @@ export default class News extends Component {
       loading: true
     };
   }
-  
+  api_key= "53fcb599db2d40d4b6517951bd93de65"
   componentDidMount() {
     this.loadPage(0);
   }
   
   loadPage = async (n) => {
     let {pageSize,category, country}=this.props
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category==='home'?'general':category}&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category==='home'?'general':category}&apiKey=${this.api_key}&page=${
       this.state.page + n
     }&PageSize=${pageSize}`;
     document.title=`${this.capitalize(category)} - NewsTechs`
