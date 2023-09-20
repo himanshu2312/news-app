@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from "./Spinner";
+import moment from "moment";
 
 export default class News extends Component {
   constructor() {
@@ -23,7 +24,6 @@ export default class News extends Component {
     let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category==='home'?'general':category}&apiKey=53fcb599db2d40d4b6517951bd93de65&page=${
       this.state.page + n
     }&PageSize=${pageSize}`;
-    console.log(url)
     document.title=`${this.capitalize(category)} - NewsTechs`
     let data = await fetch(url);
     let parseData = await data.json();
@@ -72,7 +72,7 @@ export default class News extends Component {
                       }
                       newsurl={ele.url}
                       author={ele.author}
-                      date={(new Date(ele.publishedAt)).toGMTString()}
+                      date={moment(ele.publishedAt).fromNow()}
                       source={ele.source.name}
                       />
                   </div>
