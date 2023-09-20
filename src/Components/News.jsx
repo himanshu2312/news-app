@@ -21,7 +21,7 @@ export default class News extends Component {
   
   loadPage = async (n) => {
     let {pageSize,category, country}=this.props
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category==='home'?'general':category}&apiKey=${this.api_key}&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.api_key}&page=${
       this.state.page + n
     }&PageSize=${pageSize}`;
     document.title=`${this.capitalize(category)} - NewsTechs`
@@ -61,7 +61,7 @@ export default class News extends Component {
           >
           <div className="container">
             <div className="row" >
-              {this.state.articles.map((ele,index) => {
+              {this.state.articles?.map((ele,index) => {
                 return (
                   <div className="col-md-4 my-3" key={index}>
                     <NewsItem
