@@ -1,6 +1,3 @@
-# Project is live:
-
-[NewsApp.com](https://news-app-2312.netlify.app).
 
 # Getting Started with Create React App
 
