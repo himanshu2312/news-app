@@ -14,7 +14,7 @@ export default class News extends Component {
       loading: true
     };
   }
-  api_key= "53fcb599db2d40d4b6517951bd93de65"
+  api_key= "dc2dc743f5ab4be9a6947dff899f0205"
   componentDidMount() {
     this.loadPage(0);
   }
