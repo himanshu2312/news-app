@@ -20,19 +20,23 @@ export default class News extends Component {
   }
   
   loadPage = async (n) => {
-    let {pageSize,category, country}=this.props
+    let {pageSize,category, country, setProgress}=this.props
+    setProgress(10);
     let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.api_key}&page=${
       this.state.page + n
     }&PageSize=${pageSize}`;
     document.title=`${this.capitalize(category)} - NewsTechs`
     let data = await fetch(url);
+    setProgress(40);
     let parseData = await data.json();
+    setProgress(70);
     this.setState({
       articles: this.state.articles.concat(parseData.articles),
       page: this.state.page + n,
       totalResults: parseData.totalResults,
       loading: false
     });
+    setProgress(100);
   };
   
   capitalize=(str)=>{
