@@ -50,7 +50,7 @@ export default class News extends Component {
     return (
       <>
         <h1 style={{margin: '20px'}}>
-          <center>{`NewsTechs - Top headlines ${this.props.category==='home'?"":`on ${this.capitalize(this.props.category)}`}`}</center>
+          <center>{`NewsTechs - Top headlines ${this.props.category==='general'?"":`on ${this.capitalize(this.props.category)}`}`}</center>
         </h1>
         {this.state.loading&&<Spinner/>}
         <InfiniteScroll 
