@@ -3,6 +3,7 @@ import NewsItem from "./NewsItem";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from "./Spinner";
 import moment from "moment";
+import {fetchNews} from "../api/index.js";
 
 export default class News extends Component {
   constructor() {
@@ -17,25 +18,22 @@ export default class News extends Component {
   api_key= "53fcb599db2d40d4b6517951bd93de65"
   componentDidMount() {
     this.loadPage();
-    // console.log("fom mount with page state :",this.state.page,"now fetching for page:",this.state.page+1)
   }
   
   loadPage = async () => {
     let {pageSize,category, country, setProgress}=this.props
     setProgress(10);
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.api_key}&page=${
-      this.state.page+1
-    }&PageSize=${pageSize}`;
-    // console.log(url)
     document.title=`${this.capitalize(category)} - NewsTechs`
-    let data = await fetch(url);
-    setProgress(40);
-    let parseData = await data.json();
+    
+    setProgress(20)
+    let result = await fetchNews({category,country,pageSize,page:this.state.page+1})
+    setProgress(60);
+
     setProgress(70);
     this.setState({
-      articles: this.state.articles.concat(parseData.articles),
+      articles: this.state.articles.concat(result.data.articles),
       page: this.state.page + 1,
-      totalResults: parseData.totalResults,
+      totalResults: result.data.totalResults,
       loading: false
     });
     setProgress(100);
@@ -49,7 +47,6 @@ export default class News extends Component {
     setTimeout(() => {
       this.loadPage()
     }, 1500);
-    // console.log("fom fetch with page state :",this.state.page,"now fetching for page:",this.state.page+1)
   };
 
   render() {
