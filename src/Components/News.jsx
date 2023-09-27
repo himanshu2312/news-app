@@ -9,22 +9,24 @@ export default class News extends Component {
     super();
     this.state = {
       articles: [],
-      page: 1,
+      page: 0,
       totalResults: 0,
       loading: true
     };
   }
   api_key= "53fcb599db2d40d4b6517951bd93de65"
   componentDidMount() {
-    this.loadPage(0);
+    this.loadPage();
+    // console.log("fom mount with page state :",this.state.page,"now fetching for page:",this.state.page+1)
   }
   
-  loadPage = async (n) => {
+  loadPage = async () => {
     let {pageSize,category, country, setProgress}=this.props
     setProgress(10);
     let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.api_key}&page=${
-      this.state.page + n
+      this.state.page+1
     }&PageSize=${pageSize}`;
+    // console.log(url)
     document.title=`${this.capitalize(category)} - NewsTechs`
     let data = await fetch(url);
     setProgress(40);
@@ -32,7 +34,7 @@ export default class News extends Component {
     setProgress(70);
     this.setState({
       articles: this.state.articles.concat(parseData.articles),
-      page: this.state.page + n,
+      page: this.state.page + 1,
       totalResults: parseData.totalResults,
       loading: false
     });
@@ -45,8 +47,9 @@ export default class News extends Component {
   
   fetchData = () => {
     setTimeout(() => {
-      this.loadPage(1)
+      this.loadPage()
     }, 1500);
+    // console.log("fom fetch with page state :",this.state.page,"now fetching for page:",this.state.page+1)
   };
 
   render() {
@@ -59,7 +62,7 @@ export default class News extends Component {
         {this.state.loading&&<Spinner/>}
         <InfiniteScroll 
           dataLength={this.state.articles.length} //This is important field to render the next data
-          next={this.fetchData}
+          next={()=>{this.fetchData()}}
           hasMore={this.state.articles.length!==this.state.totalResults}
           loader={<Spinner/>}
           >
