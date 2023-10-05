@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  let { NavbarTitle } = this.props;
+  let { NavbarTitle } = props;
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
