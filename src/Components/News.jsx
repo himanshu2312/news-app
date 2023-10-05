@@ -15,7 +15,7 @@ export default class News extends Component {
       loading: true
     };
   }
-  api_key= "53fcb599db2d40d4b6517951bd93de65"
+  
   componentDidMount() {
     this.loadPage();
   }
