@@ -23,7 +23,9 @@ export default class News extends Component {
   loadPage = async () => {
     let {pageSize,category, country, setProgress}=this.props
     setProgress(10);
-    document.title=`${this.capitalize(category)} - NewsTechs`
+    if(category!=="general"){
+      document.title=`${this.capitalize(category)} | NewsTechs`
+    }
     
     setProgress(20)
     let result = await fetchNews({category,country,pageSize,page:this.state.page+1})
