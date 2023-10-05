@@ -6,6 +6,7 @@ import AllRoutes from "./AllRoutes";
 import LoadingBar from 'react-top-loading-bar'
 
 export default function App(){
+  const pageSize=10;
   const [progress, setProgress] = useState(0);
 
   return (
@@ -17,7 +18,7 @@ export default function App(){
           onLoaderFinished={()=>setProgress(0)}
         />
         <Navbar NavbarTitle="NewsTechs" />
-        <AllRoutes setProgress={setProgress} />
+        <AllRoutes setProgress={setProgress} pageSize={pageSize} />
       </Router>
     </div>
   );
