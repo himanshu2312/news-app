@@ -1,50 +1,34 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = (props) => {
+  const location = useLocation();
+
   let { NavbarTitle } = props;
   return (
-    <div>
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            <b>{NavbarTitle}</b>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse"
-            id="navbarSupportedContent"
-          >
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">Home</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/business">Business</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/entertainment">Entertainment</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/health">Health</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/science">Science</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/sports">Sports</Link></li>
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/technology">Technology</Link></li>
-            </ul>
-          </div>
+    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/"><b>{NavbarTitle}</b></Link>
+        <button
+          className="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {
+              props.categories?.map((cat) => {
+                let category = `${cat !== "general" ? cat : "home"}`;
+                const path = `/${category !== "home" ? category : ''}`
+                category = category.charAt(0).toUpperCase() + category.slice(1);
+                return (<li className="nav-item" key={path} >
+                  <Link className={`nav-link ${location.pathname === path ? 'active' : ''}`} aria-current="page" to={path}>{category}</Link></li>)
+              })}
+          </ul>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 }
 

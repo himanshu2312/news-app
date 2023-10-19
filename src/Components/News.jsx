@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from "./Spinner";
@@ -15,7 +15,7 @@ const News = (props) => {
     loadPage();
     // eslint-disable-next-line
   }, [])
-  
+
 
   const loadPage = async () => {
 
@@ -32,13 +32,13 @@ const News = (props) => {
 
     setArticles(articles.concat(result.data.articles));
     setProgress(70);
-    
-    setpage(page+1);
+
+    setpage(page + 1);
     setProgress(80);
-    
+
     setTotalResults(result.data.totalResults);
     setProgress(90);
-    
+
     setLoading(false);
     setProgress(100);
   };

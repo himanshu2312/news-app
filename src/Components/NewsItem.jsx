@@ -9,7 +9,7 @@ const NewsItem =(props)=>  {
             <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success">
               {source}
             </span>
-          <img src={img?img:default_img} className="card-img-top" alt="..." />
+          <img src={img?img:default_img} height={220} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
