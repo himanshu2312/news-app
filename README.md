@@ -1,5 +1,8 @@
 # This News App is live :
   [NewsApp.com](https://news-app-2312.netlify.app)
+
+# NOTE:
+This API may take some time for the first time to give a response as it is hosted on an unpaid platform. But the UI will work fine
   
 # Getting Started with Create React App
 
@@ -57,11 +60,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/c
 This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
 ### Making a Progressive Web App
-
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
 ### Advanced Configuration
-
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
