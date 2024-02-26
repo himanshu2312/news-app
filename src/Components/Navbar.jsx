@@ -5,10 +5,10 @@ const Navbar = (props) => {
   const location = useLocation();
 
   // for local
-  const frontendBaseUrl = "http://localhost:3000";
+  // const frontendBaseUrl = "http://localhost:3000";
   
   // for remote
-  // const frontendBaseUrl = "https://news-app-2312.netlify.app";
+  const frontendBaseUrl = "https://news-app-2312.netlify.app";
 
   let { NavbarTitle } = props;
   
